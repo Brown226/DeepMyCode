@@ -5985,3 +5985,53 @@ body {
   cursor: pointer;
 }
 .tab-context-item:hover { background: var(--color-brand-soft); }
+
+/* === Welcome placeholder === */
+.welcome-placeholder {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  color: var(--color-text-muted);
+  gap: 12px;
+}
+.welcome-placeholder__icon {
+  color: var(--color-brand);
+  opacity: 0.5;
+  margin-bottom: 8px;
+}
+.welcome-placeholder__title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--color-text);
+  margin: 0;
+}
+.welcome-placeholder__desc {
+  font-size: 14px;
+  margin: 0;
+  max-width: 320px;
+  text-align: center;
+  line-height: 1.5;
+}
+.welcome-placeholder__tips {
+  display: flex;
+  gap: 24px;
+  margin-top: 16px;
+}
+.welcome-placeholder__tip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+}
+.welcome-placeholder__tip kbd {
+  background: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 12px;
+  font-family: monospace;
+  color: var(--color-text);
+}

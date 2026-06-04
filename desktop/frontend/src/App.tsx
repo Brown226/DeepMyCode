@@ -336,6 +336,12 @@ export default function App() {
   const refreshSessions = useCallback(async () => {
     const sessions = await listSessions();
     setSidebarSessions(sessions.slice(0, 10));
+    // Sync tab titles with latest session data
+    for (const s of sessions) {
+      if (s.title && tabStore.getState().tabs.some((t) => t.id === s.path)) {
+        tabStore.renameTab(s.path, s.title);
+      }
+    }
     return sessions;
   }, [listSessions]);
 

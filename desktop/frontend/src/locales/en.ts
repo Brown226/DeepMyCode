@@ -47,6 +47,12 @@ export const en = {
   "tabBar.closeOthers": "Close others",
   "tabBar.closeAll": "Close all",
 
+  // shell
+  "shell.welcomeTitle": "Welcome to DeepMyCode",
+  "shell.welcomeDesc": "Open a session from the sidebar to start chatting",
+  "shell.tipSlash": "commands",
+  "shell.tipNewSession": "new session",
+
   // router
   "router.noTabOpen": "No tab open",
   "router.noTabOpenDesc": "Open a session from the sidebar to get started",

@@ -48,6 +48,12 @@ export const zh: Record<DictKey, string> = {
   "tabBar.closeOthers": "关闭其他",
   "tabBar.closeAll": "关闭全部",
 
+  // 欢迎
+  "shell.welcomeTitle": "欢迎使用 DeepMyCode",
+  "shell.welcomeDesc": "从侧边栏打开一个会话开始对话",
+  "shell.tipSlash": "命令",
+  "shell.tipNewSession": "新建会话",
+
   // 路由
   "router.noTabOpen": "暂无打开的标签",
   "router.noTabOpenDesc": "从侧边栏打开一个会话开始",

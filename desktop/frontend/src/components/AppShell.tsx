@@ -4,13 +4,16 @@
 
 import { useEffect, type ReactNode } from "react";
 import { TabBar } from "./TabBar";
-import { tabStore } from "../lib/tabStore";
+import { Welcome } from "./WelcomePage";
+import { tabStore, useTabState } from "../lib/tabStore";
 
 interface AppShellProps {
   children: ReactNode;
 }
 
 export function AppShell({ children }: AppShellProps) {
+  const { tabs } = useTabState();
+
   useEffect(() => {
     tabStore.restore();
   }, []);
@@ -20,7 +23,7 @@ export function AppShell({ children }: AppShellProps) {
       <main className="appshell-main">
         <TabBar />
         <div className="appshell-content">
-          {children}
+          {tabs.length === 0 ? <Welcome /> : children}
         </div>
       </main>
     </div>
