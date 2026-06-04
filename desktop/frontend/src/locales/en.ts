@@ -41,6 +41,16 @@ export const en = {
   "sidebar.resize": "Resize sidebar",
   "drawer.resize": "Resize drawer",
 
+  // tabBar
+  "tabBar.empty": "No tabs open",
+  "tabBar.closeTab": "Close tab",
+  "tabBar.closeOthers": "Close others",
+  "tabBar.closeAll": "Close all",
+
+  // router
+  "router.noTabOpen": "No tab open",
+  "router.noTabOpenDesc": "Open a session from the sidebar to get started",
+
   // workspace panel
   "workspace.title": "Workspace",
   "workspace.open": "Open workspace panel",

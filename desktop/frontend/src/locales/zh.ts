@@ -42,6 +42,16 @@ export const zh: Record<DictKey, string> = {
   "sidebar.resize": "调整侧边栏宽度",
   "drawer.resize": "调整抽屉宽度",
 
+  // 标签栏
+  "tabBar.empty": "暂无打开的标签",
+  "tabBar.closeTab": "关闭标签",
+  "tabBar.closeOthers": "关闭其他",
+  "tabBar.closeAll": "关闭全部",
+
+  // 路由
+  "router.noTabOpen": "暂无打开的标签",
+  "router.noTabOpenDesc": "从侧边栏打开一个会话开始",
+
   // 工作区面板
   "workspace.title": "工作区",
   "workspace.open": "打开工作区面板",
