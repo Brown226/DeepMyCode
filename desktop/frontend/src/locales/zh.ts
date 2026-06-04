@@ -35,7 +35,7 @@ export const zh: Record<DictKey, string> = {
   "sidebar.noRecent": "还没有最近会话",
   "sidebar.workspace": "工作区",
   "sidebar.changeWorkspace": "更改",
-  "sidebar.navigation": "Reasonix 导航",
+  "sidebar.navigation": "DeepMyCode 导航",
   "sidebar.collapse": "收起侧边栏",
   "sidebar.expand": "展开侧边栏",
   "sidebar.expandBlocked": "关闭右侧文件面板后可展开侧边栏",
@@ -190,7 +190,7 @@ export const zh: Record<DictKey, string> = {
   "welcome.ex3": "智能体的运行主循环在哪，它做了什么？",
 
   // 输入框
-  "composer.placeholder": "给 Reasonix 发消息…  ( / 命令 · @ 文件 )",
+  "composer.placeholder": "给 DeepMyCode 发消息…  ( / 命令 · @ 文件 )",
   "composer.planMode": "计划模式",
   "composer.planModeOn": "计划模式已开",
   "composer.planHint": "shift+tab",
@@ -291,7 +291,7 @@ export const zh: Record<DictKey, string> = {
   "memory.notePlaceholder": "记住…",
   "memory.remember": "记住",
   "memory.instructionFiles": "指令文件",
-  "memory.noDocs": "未找到 REASONIX.md。可在上方快速添加一条。",
+  "memory.noDocs": "未找到 DEEPMYCODE.md。可在上方快速添加一条。",
   "memory.savedMemories": "已保存的记忆",
   "memory.fallibleNote": "这些是背景记忆。引用文件、函数或配置项前仍需验证。",
   "memory.searchPlaceholder": "搜索标题、slug、描述或正文…",
@@ -465,7 +465,7 @@ export const zh: Record<DictKey, string> = {
   "updater.dismiss": "稍后",
 
   // onboarding — first-run API-key overlay
-  "onboarding.title": "连接 Reasonix",
+  "onboarding.title": "连接 DeepMyCode",
   "onboarding.tagline": "粘贴一个 DeepSeek API key 即可开始。密钥仅存于本机的 .env，不会发往任何地方。",
   "onboarding.inputLabel": "API 密钥",
   "onboarding.inputPlaceholder": "sk-…",

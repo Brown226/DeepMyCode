@@ -11,7 +11,7 @@ import (
 	"reasonix/internal/mcpdiag"
 )
 
-// mcpJSONFile is the project-root file Claude Code calls .mcp.json. Reasonix reads
+// mcpJSONFile is the project-root file Claude Code calls .mcp.json. DeepMyCode reads
 // it so an MCP server already configured for Claude works here unchanged — the
 // server specs map field-for-field onto PluginEntry.
 const mcpJSONFile = ".mcp.json"
@@ -68,7 +68,7 @@ func specsToEntries(specs map[string]mcpServerSpec, skip map[string]bool) []Plug
 	return entries
 }
 
-// legacyConfigPath is the v0.x (TypeScript line) config file, ~/.reasonix/config.json.
+// legacyConfigPath is the v0.x (TypeScript line) config file, ~/.deepmycode/config.json.
 func legacyConfigPath() string {
 	home, err := os.UserHomeDir()
 	if err != nil {
@@ -77,7 +77,7 @@ func legacyConfigPath() string {
 	return filepath.Join(home, ".reasonix", "config.json")
 }
 
-// loadLegacyMCP reads the v0.x ~/.reasonix/config.json and returns its enabled
+// loadLegacyMCP reads the v0.x ~/.deepmycode/config.json and returns its enabled
 // mcpServers as PluginEntry values (servers listed in its mcpDisabled are
 // skipped), so upgrading from v0.x keeps MCP servers working without rewriting
 // them as [[plugins]]. Absent or malformed → nil: a stale legacy file must never
@@ -119,8 +119,8 @@ func pluginEntryFromMCPSpec(name string, s mcpServerSpec) PluginEntry {
 }
 
 // mergeMCPJSON appends servers from .mcp.json that the TOML config did not
-// already declare. reasonix.toml's [[plugins]] win on a name collision: it is the
-// Reasonix-specific, more explicit of the two, so it overrides the shared,
+// already declare. deepmycode.toml's [[plugins]] win on a name collision: it is the
+// DeepMyCode-specific, more explicit of the two, so it overrides the shared,
 // checked-in .mcp.json rather than the other way round.
 func (c *Config) mergeMCPJSON(entries []PluginEntry) {
 	have := make(map[string]bool, len(c.Plugins))

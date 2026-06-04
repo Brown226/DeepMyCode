@@ -10,8 +10,8 @@ export function Welcome({ onPrompt }: { onPrompt: (text: string) => void }) {
   const examples = [t("welcome.ex1"), t("welcome.ex2"), t("welcome.ex3")];
   return (
     <div className="welcome">
-      <img src={logo} className="welcome__logo" alt="Reasonix" />
-      <div className="welcome__title">Reasonix</div>
+      <img src={logo} className="welcome__logo" alt="DeepMyCode" />
+      <div className="welcome__title">DeepMyCode</div>
       <div className="welcome__tag">{t("welcome.tagline")}</div>
 
       <div className="welcome__hints">

@@ -1,0 +1,51 @@
+# DeepMyCode 配置文件
+# 基于 DeepMyCode 配置格式
+
+default_model = "deepseek"   # 默认使用 DeepSeek
+language      = "zh"         # 中文界面
+
+[ui]
+theme = "auto"   # auto|dark|light
+
+[agent]
+system_prompt = """
+You are DeepMyCode, a coding agent focused on executing code tasks.
+Use the provided tools to read and write files and run shell commands.
+Principles: understand the request before acting; verify with tools instead of
+guessing; keep changes minimal and correct; briefly summarize what you did."""
+max_steps   = 25
+temperature = 0.0
+auto_plan   = "ask"
+
+# DeepSeek — 主力模型
+[[providers]]
+name        = "deepseek"
+kind        = "openai"
+base_url    = "https://api.deepseek.com"
+models      = ["deepseek-v4-flash", "deepseek-v4-pro"]
+default     = "deepseek-v4-flash"
+api_key_env = "DEEPSEEK_API_KEY"
+context_window = 1000000
+price       = { cache_hit = 0.02, input = 1, output = 2, currency = "¥" }
+effort      = "high"
+
+# MiMo Pro — 思考模式
+[[providers]]
+name           = "mimo-pro"
+kind           = "openai"
+base_url       = "https://token-plan-cn.xiaomimimo.com/v1"
+model          = "mimo-v2.5-pro"
+api_key_env    = "MIMO_API_KEY"
+context_window = 1000000
+
+# MiMo — 多模态版本
+[[providers]]
+name           = "mimo"
+kind           = "openai"
+base_url       = "https://token-plan-cn.xiaomimimo.com/v1"
+model          = "mimo-v2.5"
+api_key_env    = "MIMO_API_KEY"
+context_window = 1000000
+
+[tools]
+enabled = []   # 空 = 启用所有内置工具

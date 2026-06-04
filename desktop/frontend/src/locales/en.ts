@@ -34,7 +34,7 @@ export const en = {
   "sidebar.noRecent": "No recent chats",
   "sidebar.workspace": "Workspace",
   "sidebar.changeWorkspace": "Change",
-  "sidebar.navigation": "Reasonix navigation",
+  "sidebar.navigation": "DeepMyCode navigation",
   "sidebar.collapse": "Collapse sidebar",
   "sidebar.expand": "Expand sidebar",
   "sidebar.expandBlocked": "Close the right file panel before expanding the sidebar",
@@ -189,7 +189,7 @@ export const en = {
   "welcome.ex3": "Where is the agent run loop, and what does it do?",
 
   // composer
-  "composer.placeholder": "Message Reasonix…  ( / commands · @ files )",
+  "composer.placeholder": "Message DeepMyCode…  ( / commands · @ files )",
   "composer.planMode": "plan mode",
   "composer.planModeOn": "plan mode on",
   "composer.planHint": "shift+tab",
@@ -290,7 +290,7 @@ export const en = {
   "memory.notePlaceholder": "Remember that…",
   "memory.remember": "Remember",
   "memory.instructionFiles": "Instruction files",
-  "memory.noDocs": "No REASONIX.md found. Quick-add one above.",
+  "memory.noDocs": "No DEEPMYCODE.md found. Quick-add one above.",
   "memory.savedMemories": "Saved memories",
   "memory.fallibleNote": "Background memory. Verify file, function, and flag references before relying on them.",
   "memory.searchPlaceholder": "Search title, slug, description, or body…",
@@ -464,7 +464,7 @@ export const en = {
   "updater.dismiss": "Later",
 
   // onboarding — first-run API-key overlay
-  "onboarding.title": "Connect Reasonix",
+  "onboarding.title": "Connect DeepMyCode",
   "onboarding.tagline": "Paste a DeepSeek API key to start. Stored locally in .env, never sent anywhere else.",
   "onboarding.inputLabel": "API key",
   "onboarding.inputPlaceholder": "sk-…",

@@ -34,8 +34,8 @@ import (
 // fallback. Mirrors the v1 desktop's two-endpoint scheme.
 const (
 	manifestPrimary     = "https://pub-147fb53b9c1e4bbf891a257968619ea7.r2.dev/latest/latest.json"
-	manifestFallback    = "https://github.com/esengine/reasonix/releases/latest/download/latest.json"
-	defaultDownloadPage = "https://github.com/esengine/reasonix/releases/latest"
+	manifestFallback    = "https://github.com/Brown226/DeepMyCode/releases/latest/download/latest.json"
+	defaultDownloadPage = "https://github.com/Brown226/DeepMyCode/releases/latest"
 	httpTimeout         = 15 * time.Second
 )
 
@@ -239,7 +239,7 @@ func extractBinary(targz []byte, name string) ([]byte, error) {
 // applyLinux replaces the running binary with the one inside the downloaded
 // tar.gz; the caller relaunches afterwards.
 func applyLinux(targz []byte) error {
-	bin, err := extractBinary(targz, "reasonix-desktop")
+	bin, err := extractBinary(targz, "deepmycode-desktop")
 	if err != nil {
 		return err
 	}
@@ -250,7 +250,7 @@ func applyLinux(targz []byte) error {
 // The per-user installer needs no admin rights and its finish page relaunches the
 // app; the caller then exits so the installer can replace the running exe.
 func applyWindows(installer []byte) error {
-	f, err := os.CreateTemp("", "reasonix-update-*.exe")
+	f, err := os.CreateTemp("", "deepmycode-update-*.exe")
 	if err != nil {
 		return err
 	}

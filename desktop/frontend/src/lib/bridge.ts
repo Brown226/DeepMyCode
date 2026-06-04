@@ -115,8 +115,8 @@ export interface AppBindings {
   SetModel(name: string): Promise<void>;
   Effort(): Promise<EffortInfo>;
   SetEffort(level: string): Promise<void>;
-  // Memory panel: read the loaded REASONIX.md hierarchy + saved auto-memories,
-  // quick-add a note to a scope's REASONIX.md (≡ "#<note>"), and overwrite a doc
+  // Memory panel: read the loaded DEEPMYCODE.md hierarchy + saved auto-memories,
+  // quick-add a note to a scope's DEEPMYCODE.md (≡ "#<note>"), and overwrite a doc
   // from the in-place editor.
   Memory(): Promise<MemoryView>;
   Remember(scope: string, note: string): Promise<string>;
@@ -281,8 +281,8 @@ function makeMockApp(): AppBindings {
   let cancelled = false;
   let pendingAskPreview = false;
   let pendingApprovalPreview = false;
-  let cwd = "~/projects/reasonix"; // mutable so PickWorkspace is visible in dev
-  let workspaces = ["~/projects/reasonix", "~/projects/blade", "~/projects/deepseek-forge", "~/projects/cc-switch-light", "~/projects/SuperRig"];
+  let cwd = "~/projects/deepmycode"; // mutable so PickWorkspace is visible in dev
+  let workspaces = ["~/projects/deepmycode", "~/projects/blade", "~/projects/deepseek-forge", "~/projects/cc-switch-light", "~/projects/SuperRig"];
   let mockEffort = "auto";
   const day = 86_400_000;
   const t0 = Date.now();
@@ -334,10 +334,10 @@ function makeMockApp(): AppBindings {
   const capSkills: SkillView[] = [
     { name: "explore", description: "Investigate the codebase in an isolated subagent", scope: "builtin", runAs: "subagent" },
     { name: "review", description: "Review the staged diff", scope: "project", runAs: "inline" },
-    { name: "init", description: "Scaffold a REASONIX.md for this repo", scope: "builtin", runAs: "inline" },
+    { name: "init", description: "Scaffold a DEEPMYCODE.md for this repo", scope: "builtin", runAs: "inline" },
   ];
   let capSkillRoots: SkillRootView[] = [
-    { dir: "~/projects/reasonix/.reasonix/skills", scope: "project", priority: 1, status: "missing", configured: false, skills: 0 },
+    { dir: "~/projects/deepmycode/.deepmycode/skills", scope: "project", priority: 1, status: "missing", configured: false, skills: 0 },
     {
       dir: "~/my-skills",
       scope: "custom",
@@ -348,7 +348,7 @@ function makeMockApp(): AppBindings {
       skillItems: [{ name: "review", description: "Review the staged diff", scope: "custom", runAs: "inline" }],
     },
     {
-      dir: "~/.reasonix/skills",
+      dir: "~/.deepmycode/skills",
       scope: "global",
       priority: 6,
       status: "ok",
@@ -356,7 +356,7 @@ function makeMockApp(): AppBindings {
       skills: 2,
       skillItems: [
         { name: "explore", description: "Investigate the codebase in an isolated subagent", scope: "global", runAs: "subagent" },
-        { name: "init", description: "Scaffold a REASONIX.md for this repo", scope: "global", runAs: "inline" },
+        { name: "init", description: "Scaffold a DEEPMYCODE.md for this repo", scope: "global", runAs: "inline" },
       ],
     },
   ];
@@ -388,8 +388,8 @@ function makeMockApp(): AppBindings {
       noProxy: "",
       proxy: { type: "socks5", server: "127.0.0.1", port: 7890, username: "", password: "" },
     },
-    agent: { temperature: 0.2, maxSteps: 0, systemPrompt: "You are Reasonix, a coding agent." },
-    configPath: "~/projects/reasonix/reasonix.toml",
+    agent: { temperature: 0.2, maxSteps: 0, systemPrompt: "You are DeepMyCode, a coding agent." },
+    configPath: "~/projects/deepmycode/deepmycode.toml",
     providerKinds: ["openai"],
     bypass: false,
   };
@@ -454,8 +454,8 @@ function makeMockApp(): AppBindings {
               },
               {
                 id: "q2",
-                header: "Reasonix 构建",
-                prompt: "对于 reasonix 二进制缺失的问题，你想怎么做？",
+                header: "DeepMyCode 构建",
+                prompt: "对于 deepmycode 二进制缺失的问题，你想怎么做？",
                 options: [
                   { label: "先查文档", description: "查看 README / 构建文档来确定正确的构建命令" },
                   { label: "看构建配置", description: "查看 desktop/wails.json 与 main.go 来推断入口" },
@@ -591,7 +591,7 @@ function makeMockApp(): AppBindings {
     async PickWorkspace() {
       // Browser dev has no native dialog; simulate picking a folder and re-root so
       // the topbar folder chip visibly changes.
-      return mockSwitchWorkspace(cwd.endsWith("another-project") ? "~/projects/reasonix" : "~/projects/another-project");
+      return mockSwitchWorkspace(cwd.endsWith("another-project") ? "~/projects/deepmycode" : "~/projects/another-project");
     },
     async SwitchWorkspace(path: string) {
       return mockSwitchWorkspace(path);
@@ -791,8 +791,8 @@ function makeMockApp(): AppBindings {
     },
     async ReadFile(rel: string) {
       const samples: Record<string, string> = {
-        "README.md": "# Reasonix\n\nBrowser-dev workspace preview.\n\n- Chat in the center\n- Browse files on the right\n- Keep sessions on the left\n",
-        "go.mod": "module reasonix\n\ngo 1.23\n",
+        "README.md": "# DeepMyCode\n\nBrowser-dev workspace preview.\n\n- Chat in the center\n- Browse files on the right\n- Keep sessions on the left\n",
+        "go.mod": "module deepmycode\n\ngo 1.23\n",
         "desktop/file.go": "package desktop\n\nfunc main() {\n\tprintln(\"workspace preview\")\n}\n",
         "internal/event.go": "package internal\n\n// mock file used by the browser dev seam\n",
       };
@@ -828,14 +828,14 @@ function makeMockApp(): AppBindings {
       console.info("mock RevealWorkspacePath", rel);
     },
     async SavePastedImage(_dataUrl: string) {
-      return ".reasonix/attachments/mock.png";
+      return ".deepmycode/attachments/mock.png";
     },
     async SavePastedFile(name: string, _dataUrl: string) {
-      return `.reasonix/attachments/mock-${name}`;
+      return `.deepmycode/attachments/mock-${name}`;
     },
     async AttachDropped(path: string) {
       const name = path.split(/[/\\]/).filter(Boolean).pop() ?? path;
-      return { kind: "attachment" as const, path: `.reasonix/attachments/mock-${name}` };
+      return { kind: "attachment" as const, path: `.deepmycode/attachments/mock-${name}` };
     },
     async AttachmentDataURL(_path: string) {
       return "data:image/png;base64,iVBORw0KGgo=";
@@ -856,15 +856,15 @@ function makeMockApp(): AppBindings {
     async Memory() {
       return {
         available: true,
-        storeDir: "~/.config/reasonix/projects/-mock/memory",
+        storeDir: "~/.config/deepmycode/projects/-mock/memory",
         docs: [
           {
-            path: "REASONIX.md",
+            path: "DEEPMYCODE.md",
             scope: "project",
-            body: "# Reasonix project memory\n\nMock doc shown in the browser dev seam.\n\n## Notes\n\n- prefers concise replies",
+            body: "# DeepMyCode project memory\n\nMock doc shown in the browser dev seam.\n\n## Notes\n\n- prefers concise replies",
           },
           {
-            path: "~/.config/reasonix/REASONIX.md",
+            path: "~/.config/deepmycode/DEEPMYCODE.md",
             scope: "user",
             body: "# User memory\n\nAlways respond in 中文.",
           },
@@ -878,15 +878,15 @@ function makeMockApp(): AppBindings {
           },
         ],
         scopes: [
-          { scope: "user", path: "~/.config/reasonix/REASONIX.md" },
-          { scope: "project", path: "REASONIX.md" },
-          { scope: "local", path: "REASONIX.local.md" },
+          { scope: "user", path: "~/.config/deepmycode/DEEPMYCODE.md" },
+          { scope: "project", path: "DEEPMYCODE.md" },
+          { scope: "local", path: "DEEPMYCODE.local.md" },
         ],
       };
     },
     async Remember(scope: string, note: string) {
       emit({ kind: "notice", level: "info", text: `remembered → ${scope}` });
-      return `${scope} REASONIX.md (mock): ${note}`;
+      return `${scope} DEEPMYCODE.md (mock): ${note}`;
     },
     async Forget(name: string) {
       emit({ kind: "notice", level: "info", text: `forgot → ${name}` });
@@ -952,7 +952,7 @@ function makeMockApp(): AppBindings {
         latest: "v1.1.0",
         notes: "- Mock release notes\n- The **Update now** button streams a fake download here.",
         canSelfUpdate: true,
-        downloadUrl: "https://github.com/esengine/reasonix/releases/latest",
+        downloadUrl: "https://github.com/Brown226/DeepMiCode/releases/latest",
         assetSize: 12_345_678,
       };
     },
@@ -971,7 +971,7 @@ function makeMockApp(): AppBindings {
     },
     async OpenDownloadPage() {
       if (typeof window !== "undefined") {
-        window.open("https://github.com/esengine/reasonix/releases/latest", "_blank", "noopener");
+        window.open("https://github.com/Brown226/DeepMiCode/releases/latest", "_blank", "noopener");
       }
     },
     // Dev seam: drives the overlay flow in the browser until ConnectKey sets the

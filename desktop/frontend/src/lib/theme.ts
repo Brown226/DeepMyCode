@@ -34,8 +34,8 @@ const DEFAULT_THEME_STYLE: Record<ResolvedTheme, ThemeStyle> = {
   light: "sandstone",
 };
 
-const THEME_KEY = "reasonix-theme";
-const STYLE_KEY = "reasonix-theme-style";
+const THEME_KEY = "deepmycode-theme";
+const STYLE_KEY = "deepmycode-theme-style";
 
 function normalizeTheme(value: unknown): Theme | null {
   if (typeof value === "object" && value !== null) {

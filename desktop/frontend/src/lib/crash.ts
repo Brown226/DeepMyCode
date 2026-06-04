@@ -10,7 +10,7 @@ function paint(text: string) {
   }
   const title = document.createElement("div");
   title.className = "crash-overlay__title";
-  title.textContent = "Reasonix hit an error — screenshot this and send it over";
+  title.textContent = "DeepMyCode hit an error — screenshot this and send it over";
   const body = document.createElement("pre");
   body.className = "crash-overlay__body";
   body.textContent = text;

@@ -378,7 +378,7 @@ func mcpConfigLocation() string {
 	if path := config.UserConfigPath(); path != "" {
 		return path
 	}
-	return "reasonix.toml"
+	return "deepmycode.toml"
 }
 
 type mcpEditConfigLaunch struct {

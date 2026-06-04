@@ -17,7 +17,7 @@ import (
 // cwd isn't writable.
 
 // workspaceStatePath is where the last working folder is remembered (under the
-// user config dir, shared with the rest of Reasonix's state).
+// user config dir, shared with the rest of DeepMyCode's state).
 func workspaceStatePath() string {
 	dir := config.MemoryUserDir() // …/reasonix
 	if dir == "" {

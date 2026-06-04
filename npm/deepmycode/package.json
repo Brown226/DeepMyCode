@@ -1,0 +1,39 @@
+{
+  "name": "deepmycode",
+  "version": "0.0.0",
+  "description": "Cache-first DeepSeek coding agent for the terminal.",
+  "bin": {
+    "deepmycode": "bin/deepmycode.js"
+  },
+  "files": [
+    "bin/deepmycode.js"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/Brown226/DeepMyCode#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Brown226/DeepMyCode.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Brown226/DeepMyCode/issues"
+  },
+  "keywords": [
+    "deepseek",
+    "ai",
+    "agent",
+    "cli",
+    "coding-assistant",
+    "tui"
+  ],
+  "optionalDependencies": {
+    "@deepmycode/cli-darwin-arm64": "0.0.0",
+    "@deepmycode/cli-darwin-x64": "0.0.0",
+    "@deepmycode/cli-linux-arm64": "0.0.0",
+    "@deepmycode/cli-linux-x64": "0.0.0",
+    "@deepmycode/cli-win32-arm64": "0.0.0",
+    "@deepmycode/cli-win32-x64": "0.0.0"
+  }
+}

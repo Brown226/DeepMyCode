@@ -40,7 +40,7 @@ import type { ComposerInsertRequest, MemoryView, Mode, SessionMeta } from "./lib
 import { loadLayoutSize, saveLayoutSize } from "./lib/layoutPreferences";
 import { applyTheme, getTheme, getThemeStyle, isThemeStyle, themeForStyle, type Theme } from "./lib/theme";
 
-const SIDEBAR_COLLAPSED_KEY = "reasonix.sidebar.collapsed";
+const SIDEBAR_COLLAPSED_KEY = "deepmycode.sidebar.collapsed";
 const SIDEBAR_COLLAPSED_WIDTH = 68;
 const SIDEBAR_DEFAULT_WIDTH = 264;
 const SIDEBAR_MIN_WIDTH = 228;
@@ -695,7 +695,7 @@ export default function App() {
         <aside className={`sidebar${sidebarCollapsed ? " sidebar--collapsed" : ""}`} aria-label={t("sidebar.navigation")}>
           <div className="sidebar__brand">
             <img src={logo} alt="" className="sidebar__logo" />
-            <span>Reasonix</span>
+            <span>DeepMyCode</span>
             <Tooltip label={sidebarToggleTitle}>
               <button
                 className={`sidebar__toggle${sidebarExpandBlocked ? " sidebar__toggle--blocked" : ""}`}
@@ -878,7 +878,7 @@ export default function App() {
         <section className="chat-pane">
           <header className="topbar">
             <div className="topbar__identity">
-              <span className="topbar__title">Reasonix</span>
+              <span className="topbar__title">DeepMyCode</span>
               <span className="topbar__model">{state.meta?.label ?? "…"}</span>
             </div>
             <div className="topbar__spacer" />

@@ -11,16 +11,16 @@ type LayoutPreferences = {
   sizes?: Partial<Record<LayoutSizeKey, number>>;
 };
 
-const STORAGE_KEY = "reasonix.layoutPreferences.v1";
+const STORAGE_KEY = "deepmycode.layoutPreferences.v1";
 
 const LEGACY_SIZE_KEYS: Record<LayoutSizeKey, string[]> = {
-  sidebarWidth: ["reasonix.sidebar.width"],
-  workspacePanelWidth: ["reasonix.workspacePanel.width"],
+  sidebarWidth: ["deepmycode.sidebar.width"],
+  workspacePanelWidth: ["deepmycode.workspacePanel.width"],
   workspaceFileTreePanelWidth: [],
-  workspaceTreeWidth: ["reasonix.workspaceTree.width"],
-  composerHeight: ["reasonix.composerHeight"],
-  drawerWidth: ["reasonix.drawer.width"],
-  settingsDrawerWidth: ["reasonix.settingsDrawer.width"],
+  workspaceTreeWidth: ["deepmycode.workspaceTree.width"],
+  composerHeight: ["deepmycode.composerHeight"],
+  drawerWidth: ["deepmycode.drawer.width"],
+  settingsDrawerWidth: ["deepmycode.settingsDrawer.width"],
 };
 
 type ClampSize = (value: number) => number;

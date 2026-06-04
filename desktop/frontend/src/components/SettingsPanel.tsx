@@ -23,7 +23,7 @@ const SETTINGS_TABS: SettingsTab[] = ["models", "providers", "network", "permiss
 
 // SettingsPanel is the desktop settings surface, aligning with Claude Code's
 // settings: model & providers (incl. API keys), permissions, sandbox, agent
-// params, and appearance. Every change writes reasonix.toml (or .env for keys)
+// params, and appearance. Every change writes deepmycode.toml (or .env for keys)
 // through the kernel's config edit API and rebuilds the controller live.
 export function SettingsPanel({ onClose, onChanged }: { onClose: () => void; onChanged: () => void }) {
   const t = useT();

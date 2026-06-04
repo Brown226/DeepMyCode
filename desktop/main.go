@@ -1,4 +1,4 @@
-// Command reasonix-desktop is the Wails shell around the Reasonix kernel: a native
+// Command reasonix-desktop is the Wails shell around the DeepMyCode kernel: a native
 // window hosting a webview frontend, with the Go-side control.Controller bound
 // directly to the UI (no HTTP hop — bindings in, runtime events out). It lives in
 // a nested module (reasonix/desktop) so the CGO/WebKit desktop build never touches
@@ -40,7 +40,7 @@ func main() {
 	app := NewApp()
 
 	err := wails.Run(&options.App{
-		Title:     "Reasonix",
+		Title:     "DeepMyCode",
 		Width:     1240,
 		Height:    720,
 		MinWidth:  760,
@@ -81,7 +81,7 @@ func main() {
 			},
 		},
 		Linux: &linux.Options{
-			ProgramName: "Reasonix",
+			ProgramName: "DeepMyCode",
 			// WebKitGTK GPU compositing is inconsistent across distros/drivers and
 			// is the one real cross-platform rough edge for a Go+webview stack:
 			// "always" can yield blank or flickering webviews on some setups, so

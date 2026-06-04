@@ -7,28 +7,28 @@ import (
 	"strings"
 )
 
-// RenderTOML renders the config as annotated TOML in the `reasonix setup` house style:
+// RenderTOML renders the config as annotated TOML in the `deepmycode setup` house style:
 // comments preserved, system_prompt as a multi-line string, helpful hints. The
 // output round-trips back through Load (see render_test.go).
 func RenderTOML(c *Config) string {
 	var b strings.Builder
 
-	b.WriteString("# Reasonix configuration.\n")
-	b.WriteString("# Resolution order: flag > ./reasonix.toml > ~/.config/reasonix/config.toml > built-in defaults.\n")
+	b.WriteString("# DeepMyCode configuration.\n")
+	b.WriteString("# Resolution order: flag > ./deepmycode.toml > ~/.config/deepmycode/config.toml > built-in defaults.\n")
 	b.WriteString("# Secrets come from the environment via api_key_env; never put keys here.\n\n")
 
 	fmt.Fprintf(&b, "default_model = %q\n", c.DefaultModel)
 	if c.Language != "" {
-		fmt.Fprintf(&b, "language      = %q   # ui/model language; empty = auto-detect from $LANG / $REASONIX_LANG\n", c.Language)
+		fmt.Fprintf(&b, "language      = %q   # ui/model language; empty = auto-detect from $LANG / $DEEPMYCODE_LANG\n", c.Language)
 	} else {
-		b.WriteString("# language      = \"zh\"   # ui/model language; empty = auto-detect from $LANG / $REASONIX_LANG\n")
+		b.WriteString("# language      = \"zh\"   # ui/model language; empty = auto-detect from $LANG / $DEEPMYCODE_LANG\n")
 	}
 	b.WriteString("\n")
 
 	b.WriteString("[ui]\n")
-	fmt.Fprintf(&b, "theme = %q   # auto|dark|light; CLI colors only; REASONIX_THEME can override per run\n", c.UITheme())
+	fmt.Fprintf(&b, "theme = %q   # auto|dark|light; CLI colors only; DEEPMYCODE_THEME can override per run\n", c.UITheme())
 	if style := c.UIThemeStyle(); style != "" {
-		fmt.Fprintf(&b, "theme_style = %q   # accent palette; REASONIX_THEME_STYLE can override per run\n", style)
+		fmt.Fprintf(&b, "theme_style = %q   # accent palette; DEEPMYCODE_THEME_STYLE can override per run\n", style)
 	} else {
 		b.WriteString("# theme_style = \"graphite\"   # graphite|ember|aurora|midnight|sandstone|porcelain|linen|glacier\n")
 	}
@@ -70,7 +70,7 @@ func RenderTOML(c *Config) string {
 	if c.Network.Proxy.Password != "" {
 		fmt.Fprintf(&b, "password = %q   # supports ${VAR} expansion\n", c.Network.Proxy.Password)
 	} else {
-		b.WriteString("# password = \"${REASONIX_PROXY_PASSWORD}\"   # optional; supports ${VAR} expansion\n")
+		b.WriteString("# password = \"${DEEPMYCODE_PROXY_PASSWORD}\"   # optional; supports ${VAR} expansion\n")
 	}
 	b.WriteString("\n")
 
@@ -179,7 +179,7 @@ func RenderTOML(c *Config) string {
 	if c.Codegraph.Path != "" {
 		fmt.Fprintf(&b, "path         = %q   # optional launcher override\n", c.Codegraph.Path)
 	} else {
-		b.WriteString("# path       = \"\"   # empty = cache, then PATH, then a bundle beside reasonix\n")
+		b.WriteString("# path       = \"\"   # empty = cache, then PATH, then a bundle beside deepmycode\n")
 	}
 	if strings.TrimSpace(c.Codegraph.Tier) != "" {
 		fmt.Fprintf(&b, "tier         = %q   # lazy|background|eager\n", c.Codegraph.ResolvedTier())
@@ -248,7 +248,7 @@ func RenderTOML(c *Config) string {
 	if len(c.Plugins) == 0 {
 		b.WriteString("# [[plugins]]\n")
 		b.WriteString("# name    = \"example\"\n")
-		b.WriteString("# command = \"reasonix-plugin-example\"\n")
+		b.WriteString("# command = \"deepmycode-plugin-example\"\n")
 		b.WriteString("# [[plugins]]                                  # a remote server over Streamable HTTP\n")
 		b.WriteString("# name    = \"stripe\"\n")
 		b.WriteString("# type    = \"http\"\n")
@@ -323,7 +323,7 @@ func renderStringMap(m map[string]string) string {
 }
 
 // renderRuleList emits a permission rule list. A populated list renders as an
-// active TOML array; an empty one renders as a commented example so `reasonix setup`
+// active TOML array; an empty one renders as a commented example so `deepmycode setup`
 // scaffolds discoverable guidance without imposing surprising rules.
 func renderRuleList(key string, rules []string, example string) string {
 	if len(rules) == 0 {

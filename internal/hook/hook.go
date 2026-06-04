@@ -1,8 +1,8 @@
 // Package hook runs user-configured shell-command hooks around the agent loop:
 // PreToolUse / PostToolUse fire around each tool call, UserPromptSubmit before a
 // turn, Stop after it. Hooks come from settings.json — a project
-// (.reasonix/settings.json, only when the project is trusted) and a global
-// (~/.reasonix/settings.json) file. A hook's exit
+// (.deepmycode/settings.json, only when the project is trusted) and a global
+// (~/.deepmycode/settings.json) file. A hook's exit
 // code is its verdict: 0 = pass, 2 = block (only on the gating events), other =
 // warn. The payload is delivered as JSON on stdin; output is captured (capped)
 // and surfaced to the user. This package only loads, matches, and runs hooks;
@@ -122,18 +122,37 @@ func (h ResolvedHook) timeout() time.Duration {
 
 // SettingsDirname / SettingsFilename locate a scope's settings.json.
 const (
-	SettingsDirname  = ".reasonix"
+	SettingsDirname  = ".deepmycode"
 	SettingsFilename = "settings.json"
 )
 
-// GlobalSettingsPath is ~/.reasonix/settings.json (homeDir overrides ~).
+// GlobalSettingsPath is ~/.deepmycode/settings.json (homeDir overrides ~).
+// Falls back to legacy .reasonix/settings.json for backward compatibility.
 func GlobalSettingsPath(homeDir string) string {
-	return filepath.Join(home(homeDir), SettingsDirname, SettingsFilename)
+	p := filepath.Join(home(homeDir), SettingsDirname, SettingsFilename)
+	if _, err := os.Stat(p); err == nil {
+		return p
+	}
+	// Backward compat: fall back to legacy .reasonix directory
+	legacy := filepath.Join(home(homeDir), ".reasonix", SettingsFilename)
+	if _, err := os.Stat(legacy); err == nil {
+		return legacy
+	}
+	return p
 }
 
-// ProjectSettingsPath is <root>/.reasonix/settings.json.
+// ProjectSettingsPath is <root>/.deepmycode/settings.json.
+// Falls back to legacy <root>/.reasonix/settings.json for backward compatibility.
 func ProjectSettingsPath(projectRoot string) string {
-	return filepath.Join(projectRoot, SettingsDirname, SettingsFilename)
+	p := filepath.Join(projectRoot, SettingsDirname, SettingsFilename)
+	if _, err := os.Stat(p); err == nil {
+		return p
+	}
+	legacy := filepath.Join(projectRoot, ".reasonix", SettingsFilename)
+	if _, err := os.Stat(legacy); err == nil {
+		return legacy
+	}
+	return p
 }
 
 // LoadOptions configure Load. Project hooks load only when Trusted; global hooks

@@ -1,17 +1,17 @@
-# Migrating to Reasonix 1.0 (the Go rewrite)
+# Migrating to DeepMyCode 1.0 (the Go rewrite)
 
-Reasonix 1.0 is a **ground-up rewrite in Go**. It is a new codebase, not an
+DeepMyCode 1.0 is a **ground-up rewrite in Go**. It is a new codebase, not an
 incremental upgrade of the `0.x` TypeScript releases. This guide explains what
 changed and how to move over.
 
 ## TL;DR
 
-| | Legacy (v1) | Reasonix 1.0+ (v2) |
+| | Legacy (v1) | DeepMyCode 1.0+ (v2) |
 |---|---|---|
 | Language | TypeScript / Node | Go |
-| Branch | [`v1`](https://github.com/esengine/DeepSeek-Reasonix/tree/v1) (maintenance only) | `main-v2` (default, active) |
+| Branch | [`v1`](https://github.com/Brown226/DeepMyCode/tree/v1) (maintenance only) | `main-v2` (default, active) |
 | Versions | `0.x` (up to v0.54.x) | `1.0.0`+ |
-| Install | `npm i -g reasonix` (npm ships the TS build) | `npm i -g reasonix` too — the package wraps the Go binary; or a release archive / `go build` |
+| Install | `npm i -g deepmycode` (npm ships the TS build) | `npm i -g deepmycode` too — the package wraps the Go binary; or a release archive / `go build` |
 | Code intelligence | embedding semantic search | bundled [CodeGraph](https://github.com/colbymchenry/codegraph) (symbol/call graph) |
 
 "v1" and "v2" are **codebase generations**, not semver: the v1 line never reached
@@ -24,29 +24,29 @@ same way esbuild/biome ship native binaries via npm). The binary itself is a
 standalone Go executable; npm is only the installer, not a runtime dependency.
 
 ```sh
-npm i -g reasonix      # 1.0.0+ delivers the Go binary; 0.x is the legacy TS build
-reasonix chat
+npm i -g deepmycode      # 1.0.0+ delivers the Go binary; 0.x is the legacy TS build
+deepmycode chat
 ```
 
-Prebuilt archives (`reasonix-<os>-<arch>.tar.gz` / `.zip`) are also attached to
+Prebuilt archives (`deepmycode-<os>-<arch>.tar.gz` / `.zip`) are also attached to
 each GitHub release. Or build from source:
 
 ```sh
-git clone https://github.com/esengine/DeepSeek-Reasonix   # default: main-v2 (Go)
-cd DeepSeek-Reasonix && make build                        # -> bin/reasonix(.exe)
+git clone https://github.com/Brown226/DeepMyCode   # default: main-v2 (Go)
+cd DeepSeek-DeepMyCode && make build                        # -> bin/deepmycode(.exe)
 ```
 
-Until `1.0.0` is published to npm, `npm i -g reasonix` still installs the `0.x`
+Until `1.0.0` is published to npm, `npm i -g deepmycode` still installs the `0.x`
 TypeScript build — build from source (above) for the Go version meanwhile.
 
 ## Configuration
 
-| Legacy | Reasonix 1.0 |
+| Legacy | DeepMyCode 1.0 |
 |---|---|
-| TS config files | `reasonix.toml` (project) / `~/.config/reasonix/config.toml` (user) — see `reasonix.example.toml` |
+| TS config files | `deepmycode.toml` (project) / `~/.config/deepmycode/config.toml` (user) — see `deepmycode.example.toml` |
 | env / API keys | `.env` or the environment (`DEEPSEEK_API_KEY`, `MIMO_API_KEY`, …) via `api_key_env` |
-| project memory | `REASONIX.md` (+ auto-memory), Claude-Code-compatible |
-| MCP servers | `[[plugins]]` in `reasonix.toml`, or a Claude-Code `.mcp.json` (read as-is) |
+| project memory | `DEEPMYCODE.md` (+ auto-memory), Claude-Code-compatible |
+| MCP servers | `[[plugins]]` in `deepmycode.toml`, or a Claude-Code `.mcp.json` (read as-is) |
 
 ## What's the same
 
@@ -68,7 +68,7 @@ and DeepSeek prefix-cache–oriented design.
 
 ## File encoding
 
-Reasonix 1.0 supports reading and editing files in UTF-8, UTF-8 BOM, UTF-16
+DeepMyCode 1.0 supports reading and editing files in UTF-8, UTF-8 BOM, UTF-16
 LE/BE, and GB18030 (a superset of GBK). This matches v1's behavior.
 
 - `read_file` decodes any supported encoding to UTF-8 for the model.
@@ -83,4 +83,4 @@ Issues and PRs are labelled by line: **`v1`** (legacy TypeScript) and **`v2`**
 (Go). File new reports against the line you're using. The legacy `v1` line is in
 maintenance mode — bug fixes only, no new features.
 
-Questions? Open a [Discussion](https://github.com/esengine/DeepSeek-Reasonix/discussions).
+Questions? Open a [Discussion](https://github.com/Brown226/DeepMyCode/discussions).
