@@ -40,6 +40,7 @@ import type { ComposerInsertRequest, MemoryView, Mode, SessionMeta } from "./lib
 import { loadLayoutSize, saveLayoutSize } from "./lib/layoutPreferences";
 import { applyTheme, getTheme, getThemeStyle, isThemeStyle, themeForStyle, type Theme } from "./lib/theme";
 import { AppShell } from "./components/AppShell";
+import { tabStore } from "./lib/tabStore";
 
 const SIDEBAR_COLLAPSED_KEY = "deepmycode.sidebar.collapsed";
 const SIDEBAR_COLLAPSED_WIDTH = 68;
@@ -398,8 +399,9 @@ export default function App() {
   const startNewSession = useCallback(async () => {
     await newSession();
     await refreshSessions();
+    tabStore.openTab(`session-${Date.now()}`, "session", t("topbar.newSession"));
     setWorkspaceChangesRefreshKey((key) => key + 1);
-  }, [newSession, refreshSessions]);
+  }, [newSession, refreshSessions, t]);
 
   const toggleSidebar = useCallback(() => {
     sidebarBeforeWorkspacePreviewRef.current = null;
@@ -584,9 +586,12 @@ export default function App() {
       setHistView(null);
       await resumeSession(path);
       await refreshSessions();
+      // Open or focus a tab for this session
+      const title = sidebarSessions.find((s) => s.path === path)?.title || path;
+      tabStore.openTab(path, "session", title);
       setWorkspaceChangesRefreshKey((key) => key + 1);
     },
-    [state.running, resumeSession, refreshSessions],
+    [state.running, resumeSession, refreshSessions, sidebarSessions],
   );
   // Delete / rename act on disk, then re-fetch so the panel reflects the change.
   const onDeleteSession = useCallback(
@@ -676,6 +681,23 @@ export default function App() {
     : sidebarCollapsed
       ? t("sidebar.expand")
       : t("sidebar.collapse");
+
+  // Sync tab switches → session resume: when the active tab changes to a
+  // session tab, resume that session in the controller.
+  const prevActiveTabRef = useRef<string | null>(null);
+  useEffect(() => {
+    return tabStore.subscribe(() => {
+      const { activeTabId, tabs } = tabStore.getState();
+      if (activeTabId === prevActiveTabRef.current) return;
+      prevActiveTabRef.current = activeTabId;
+      if (!activeTabId) return;
+      const tab = tabs.find((t) => t.id === activeTabId);
+      if (tab?.type === "session" && !state.running) {
+        resumeSession(tab.id).catch(() => {});
+        refreshSessions().catch(() => {});
+      }
+    });
+  }, [resumeSession, refreshSessions, state.running]);
 
   return (
     <AppShell>
