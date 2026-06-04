@@ -1,3 +1,4 @@
+/// <reference types="vitest/config" />
 import { defineConfig, type Plugin } from "vite";
 import react from "@vitejs/plugin-react";
 
@@ -28,5 +29,19 @@ export default defineConfig({
     host: "127.0.0.1",
     port: 5173,
     strictPort: true,
+  },
+  test: {
+    environment: "happy-dom",
+    globals: true,
+    setupFiles: ["./src/test/setup.ts"],
+    css: false,
+    env: {
+      NODE_ENV: "test",
+    },
+    server: {
+      deps: {
+        inline: ["react", "react-dom"],
+      },
+    },
   },
 });
