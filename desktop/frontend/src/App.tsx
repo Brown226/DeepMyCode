@@ -39,6 +39,7 @@ import { sessionActivityTime } from "./lib/session";
 import type { ComposerInsertRequest, MemoryView, Mode, SessionMeta } from "./lib/types";
 import { loadLayoutSize, saveLayoutSize } from "./lib/layoutPreferences";
 import { applyTheme, getTheme, getThemeStyle, isThemeStyle, themeForStyle, type Theme } from "./lib/theme";
+import { AppShell } from "./components/AppShell";
 
 const SIDEBAR_COLLAPSED_KEY = "deepmycode.sidebar.collapsed";
 const SIDEBAR_COLLAPSED_WIDTH = 68;
@@ -677,6 +678,7 @@ export default function App() {
       : t("sidebar.collapse");
 
   return (
+    <AppShell>
     <div className="app">
       <div
         className={[
@@ -1068,5 +1070,6 @@ export default function App() {
 
       {needsOnboarding && <OnboardingOverlay onComplete={() => setNeedsOnboarding(false)} />}
     </div>
+    </AppShell>
   );
 }
